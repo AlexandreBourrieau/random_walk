@@ -66,12 +66,10 @@ class WalkEnv(gym.Env):
         self.s = s
         self.lastaction = action
         return (int(s), r, d, {"prob": p})
-
+  
     def reset(self):
-        super().reset()
-        self.s = self.categorical_sample(self.isd, np.random.random())
-        self.lastaction = None
-        return int(self.s)
+        self.s = int(np.random.randint(1,6,1)[0])
+        return self.s      
 
     def render(self, mode='human', close=False):
         outfile = StringIO() if mode == 'ansi' else sys.stdout
