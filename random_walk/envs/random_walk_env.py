@@ -33,6 +33,10 @@ class RandomWalk(gym.Env):
                 LEFT: [(self.alpha, i-1, 0, False), (1-self.alpha, i+1, 0, False)],
                 RIGHT: [(self.beta, i+1, 0, False), (1-self.beta, i-1, 0, False)]
             }
+        P[0] = {
+          LEFT: [(self.alpha, 0, 0, False), (1-self.alpha, 1, 0, False)],
+                RIGHT: [(self.beta, 1, 0, False), (1-self.beta, 0, 0, False)]
+                }
         # states adjacent to terminal states
         P[5] = {
             LEFT: [(self.alpha, 4, 0, False), (1-self.alpha, 6, 1, True)],
