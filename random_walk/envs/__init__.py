@@ -1,1 +1,1 @@
-from random_walk.envs.random_walk_env import RandomWalk
+from random_walk.envs.gym_walk_env import WalkEnv
