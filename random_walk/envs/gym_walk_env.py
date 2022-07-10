@@ -67,15 +67,9 @@ class WalkEnv(gym.Env):
         self.lastaction = action
         return (int(s), r, d, {"prob": p})
 
-    def reset(
-        self,
-        *,
-        seed: Optional[int] = None,
-        return_info: bool = False,
-        options: Optional[dict] = None,
-    ):
-        super().reset(seed=seed)
-        self.s = self.categorical_sample(self.isd, self.np_random)
+    def reset(self):
+        super().reset()
+        self.s = self.categorical_sample(self.isd, np.random.random())
         self.lastaction = None
         return int(self.s)
 
