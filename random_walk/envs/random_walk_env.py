@@ -52,7 +52,7 @@ class RandomWalk(gym.Env):
 
     def step(self, action):
         # terminal state do nothing
-        if self.agent_position == 0 or self.agent_position == 6:
+        if self.agent_position == 6:
             return self.agent_position, 0, True, {}
         # non terminal state, choose action according to alpha = beta = 0.5
         else:
@@ -61,8 +61,6 @@ class RandomWalk(gym.Env):
                     self.agent_position -= 1 
                     reward = 0
                     done = False
-                    if self.agent_position == 0:
-                        done = True
                 else:
                     self.agent_position += 1
                     reward = 0
@@ -75,8 +73,6 @@ class RandomWalk(gym.Env):
                     self.agent_position += 1 
                     reward = 0
                     done = False
-                    if self.agent_position == 0:
-                        done = True
                 else:
                     self.agent_position -= 1
                     reward = 0
