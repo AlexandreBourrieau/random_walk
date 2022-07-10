@@ -6,7 +6,6 @@ from typing import Optional
 
 import gym
 from gym import spaces, utils
-from gym.envs.toy_text.utils import categorical_sample
 
 WEST, EAST = 0, 1
 
@@ -52,11 +51,17 @@ class WalkEnv(gym.Env):
         self.action_space = spaces.Discrete(self.nA)
         self.observation_space = spaces.Discrete(self.nS)
 
-        self.s = categorical_sample(self.isd, self.np_random)
+        self.s = categorical_sample(self.isd)
+
+    def categorical_sample(self,prob_n):
+        prob_n = np.asarray(prob_n)
+        csprob_n = np.cumsum(prob_n)
+        return np.argmax(csprob_n > np.random())
+
 
     def step(self, action):
         transitions = self.P[self.s][action]
-        i = categorical_sample([t[0] for t in transitions], self.np_random)
+        i = categorical_sample([t[0] for t in transitions])
         p, s, r, d = transitions[i]
         self.s = s
         self.lastaction = action
