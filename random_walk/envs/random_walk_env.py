@@ -28,22 +28,18 @@ class RandomWalk(gym.Env):
         # MDP dynamics
         P = {}
         # non terminal intermediate states
-        for i in range(2,5):
+        for i in range(1,6):
             P[i] = {
                 LEFT: [(self.alpha, i-1, 0, False), (1-self.alpha, i+1, 0, False)],
                 RIGHT: [(self.beta, i+1, 0, False), (1-self.beta, i-1, 0, False)]
             }
         # states adjacent to terminal states
-        P[1] = {
-            LEFT: [(self.alpha, 0, 0, True), (1-self.alpha, 2, 0, False)],
-            RIGHT: [(self.beta, 2, 0, False), (1-self.beta, 0, 0, True)]
-        }
         P[5] = {
             LEFT: [(self.alpha, 4, 0, False), (1-self.alpha, 6, 1, True)],
             RIGHT: [(self.beta, 6, 1, True), (1-self.beta, 4, 0, False)]
         }
         # terminal states
-        for i in [0,6]:
+        for i in [6]:
             P[i] = {
                 LEFT: [(1, i, 0, True)],
                 RIGHT: [(1, i, 0, True)]
