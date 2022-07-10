@@ -51,7 +51,6 @@ class RandomWalk(gym.Env):
         self.P = P
 
     def step(self, action):
-        print("step")
         # terminal state do nothing
         if self.agent_position == 6:
             return self.agent_position, 0, True, {}
@@ -74,13 +73,13 @@ class RandomWalk(gym.Env):
                     self.agent_position += 1 
                     reward = 0
                     done = False
+                    if self.agent_position == 6:
+                        reward = 1
+                        done = True
                 else:
                     self.agent_position -= 1
                     reward = 0
                     done = False
-                    if self.agent_position == 6:
-                        reward = 1
-                        done = True
         info = {}
         return self.agent_position, reward, done, info
 
