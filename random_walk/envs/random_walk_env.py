@@ -58,26 +58,30 @@ class RandomWalk(gym.Env):
         else:
             if action == 0:
                 if np.random.uniform() < self.alpha:
-                    self.agent_position -= 1 
+                    if self.agent_position > 0:
+                        self.agent_position -= 1 
                     reward = 0
                     done = False
                 else:
-                    self.agent_position += 1
-                    reward = 0
-                    done = False
+                    if self.agent_position < 6:
+                        self.agent_position += 1
+                        reward = 0
+                        done = False
                     if self.agent_position == 6:
                         reward = 1
                         done = True
             if action == 1:
                 if np.random.uniform() < self.beta:
-                    self.agent_position += 1 
-                    reward = 0
-                    done = False
+                    if self.agent_position < 6:
+                        self.agent_position += 1   
+                        reward = 0
+                        done = False
                     if self.agent_position == 6:
                         reward = 1
                         done = True
                 else:
-                    self.agent_position -= 1
+                    if self.agent_position > 0:
+                        self.agent_position -= 1
                     reward = 0
                     done = False
         info = {}
