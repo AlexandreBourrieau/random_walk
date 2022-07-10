@@ -56,7 +56,7 @@ class WalkEnv(gym.Env):
     def categorical_sample(self,prob_n):
         prob_n = np.asarray(prob_n)
         csprob_n = np.cumsum(prob_n)
-        return np.argmax(csprob_n > np.random())
+        return np.argmax(csprob_n > np.random.random())
 
 
     def step(self, action):
