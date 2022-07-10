@@ -51,7 +51,7 @@ class WalkEnv(gym.Env):
         self.action_space = spaces.Discrete(self.nA)
         self.observation_space = spaces.Discrete(self.nS)
 
-        self.s = categorical_sample(self.isd)
+        self.s = self.categorical_sample(self.isd)
 
     def categorical_sample(self,prob_n):
         prob_n = np.asarray(prob_n)
@@ -61,7 +61,7 @@ class WalkEnv(gym.Env):
 
     def step(self, action):
         transitions = self.P[self.s][action]
-        i = categorical_sample([t[0] for t in transitions])
+        i = self.categorical_sample([t[0] for t in transitions])
         p, s, r, d = transitions[i]
         self.s = s
         self.lastaction = action
@@ -75,7 +75,7 @@ class WalkEnv(gym.Env):
         options: Optional[dict] = None,
     ):
         super().reset(seed=seed)
-        self.s = categorical_sample(self.isd, self.np_random)
+        self.s = self.categorical_sample(self.isd, self.np_random)
         self.lastaction = None
         return int(self.s)
 
