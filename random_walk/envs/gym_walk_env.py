@@ -14,7 +14,7 @@ class WalkEnv(gym.Env):
 
     metadata = {'render.modes': ['human', 'ansi']}
 
-    def __init__(self, n_states=7, p_stay=0.0, p_backward=0.5):
+    def __init__(self, n_states=5, p_stay=0.0, p_backward=0.5):
 
         # two terminal states added
         self.shape = (1, n_states + 2)
@@ -57,7 +57,6 @@ class WalkEnv(gym.Env):
         prob_n = np.asarray(prob_n)
         csprob_n = np.cumsum(prob_n)
         return np.argmax(csprob_n > np.random.random())
-
 
     def step(self, action):
         transitions = self.P[self.s][action]
