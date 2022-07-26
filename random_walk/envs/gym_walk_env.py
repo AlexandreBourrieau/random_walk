@@ -66,8 +66,11 @@ class WalkEnv(gym.Env):
         self.lastaction = action
         return (int(s), r, d, {"prob": p})
   
-    def reset(self):
-        self.s = int(np.random.randint(1,6,1)[0])
+    def reset(self,etat_initial = None):
+        if etat_initial is None:
+            self.s = int(np.random.randint(1,6,1)[0])
+        else:
+            self.s = etat_initial
         return self.s      
 
     def render(self, mode='human', close=False):
